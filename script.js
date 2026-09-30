@@ -1,83 +1,61 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+// DATA layer
+function getInputData() {
+  const inputElement = document.getElementById('inputValue');
+  const selectElement = document.getElementById('conversionType');
+  return {
+    rawValue: inputElement.value,
+    numericValue: parseFloat(inputElement.value),
+    conversionType: selectElement.value
+  };
 }
 
-body {
-  background-color: #f4f6f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 16px;
+// LOGIC layer
+function calculateConversion(data) {
+  if (data.rawValue === '' || isNaN(data.numericValue)) {
+    return null;
+  }
+
+  const conversionRates = {
+    'gal-L': { factor: 3.78541, unit: 'L' },
+    'L-gal': { factor: 1 / 3.78541, unit: 'gal' },
+    'm-km': { factor: 0.001, unit: 'km' },
+    'km-m': { factor: 1000, unit: 'm' },
+    'oz-g': { factor: 28.3495, unit: 'g' },
+    'g-oz': { factor: 1 / 28.3495, unit: 'oz' },
+    'lbs-kg': { factor: 0.453592, unit: 'kg' },
+    'kg-lbs': { factor: 1 / 0.453592, unit: 'lbs' }
+  };
+
+  const selected = conversionRates[data.conversionType];
+  if (!selected) return null;
+
+  const convertedValue = data.numericValue * selected.factor;
+  return {
+    value: Number(convertedValue.toFixed(4)),
+    unit: selected.unit
+  };
 }
 
-.converter-card {
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 400px;
+// DISPLAY layer
+function updateDisplay(result) {
+  const outputElement = document.getElementById('resultOutput');
+  if (result === null) {
+    outputElement.textContent = '---';
+  } else {
+    outputElement.textContent = `${result.value} ${result.unit}`;
+  }
 }
 
-h1 {
-  font-size: 1.5rem;
-  color: #1a1a1a;
-  margin-bottom: 20px;
-  text-align: center;
+function handleInput() {
+  const data = getInputData();
+  const result = calculateConversion(data);
+  updateDisplay(result);
 }
 
-.input-group {
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: column;
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const inputElement = document.getElementById('inputValue');
+  const selectElement = document.getElementById('conversionType');
 
-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 6px;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #cbd5e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s;
-  background-color: #fff;
-}
-
-input:focus, select:focus {
-  border-color: #3182ce;
-  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
-}
-
-.result-box {
-  margin-top: 24px;
-  padding: 16px;
-  background-color: #ebf8ff;
-  border: 1px solid #bee3f8;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.result-label {
-  font-size: 0.875rem;
-  color: #2b6cb0;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.result-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2c5282;
-  word-break: break-all;
-}
+  inputElement.addEventListener('input', handleInput);
+  selectElement.addEventListener('change', handleInput);
+});
