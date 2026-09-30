@@ -1,83 +1,341 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+/* ==========================================
+DANK UNIT CONVERTER - ULTIMATE MEME EDITION
+========================================== */
+
+/* --- Keyframe Animations --- */
+
+/* Standard Pulse & Bounce */
+@keyframes meme-pulse {
+0%, 100% {
+transform: scale(1) rotate(0deg);
+}
+50% {
+transform: scale(1.15) rotate(3deg);
+}
+}
+
+@keyframes meme-spin-pulse {
+0% {
+transform: scale(0.9) rotate(-5deg);
+}
+50% {
+transform: scale(1.2) rotate(5deg);
+}
+100% {
+transform: scale(0.9) rotate(-5deg);
+}
+}
+
+/* LeBron James "You Are My Sunshine" Golden Aura Glow */
+@keyframes sunshine-glow {
+0% {
+box-shadow: 0 0 20px #ffd700, 0 0 40px #ff8c00, 0 0 60px #ff4500;
+filter: drop-shadow(0 0 10px #ffee00);
+}
+50% {
+box-shadow: 0 0 45px #ffff00, 0 0 80px #ff7700, 0 0 110px #ff0055;
+filter: drop-shadow(0 0 25px #ffea00);
+}
+100% {
+box-shadow: 0 0 20px #ffd700, 0 0 40px #ff8c00, 0 0 60px #ff4500;
+filter: drop-shadow(0 0 10px #ffee00);
+}
+}
+
+/* "OMG MOM GET THE CAMERA" Flashing Screen Effect */
+@keyframes camera-flash {
+0%, 100% {
+text-shadow: 2px 2px 0px #ff0000, -2px -2px 0px #00ffff;
+}
+25% {
+text-shadow: -4px 3px 0px #00ff00, 4px -3px 0px #ff00ff;
+}
+50% {
+text-shadow: 4px -4px 0px #ffff00, -4px 4px 0px #0000ff;
+}
+75% {
+text-shadow: -3px -3px 0px #ff0055, 3px 3px 0px #00ffaa;
+}
+}
+
+/* Rainbow Animated Background */
+@keyframes dank-rainbow-bg {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+
+/* Smurf Cat "We Live We Love We Lie" Floating Pulse */
+@keyframes smurf-cat-float {
+0%, 100% {
+transform: translateY(0px) scale(1);
+}
+50% {
+transform: translateY(-12px) scale(1.1);
+}
+}
+
+/* Willem Dafoe Looking Up Effect */
+@keyframes dafoe-tilt {
+0%, 100% {
+transform: perspective(400px) rotateX(25deg) translateY(0);
+}
+50% {
+transform: perspective(400px) rotateX(-15deg) translateY(-8px) scale(1.08);
+}
+}
+
+/* Floating MLG Hitmarker Shake */
+@keyframes hitmarker-shake {
+0%, 100% { transform: translate(0, 0) scale(1); }
+20% { transform: translate(-3px, 3px) scale(1.2); }
+40% { transform: translate(3px, -2px) scale(0.9); }
+60% { transform: translate(-2px, -3px) scale(1.15); }
+80% { transform: translate(2px, 2px) scale(1); }
+}
+
+/* --- Global Styles --- */
+
+{
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: "Impact", "Comic Sans MS", "Trebuchet MS", sans-serif;
 }
 
 body {
-  background-color: #f4f6f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 16px;
+min-height: 100vh;
+padding: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+position: relative;
+overflow-x: hidden;
+background: linear-gradient(-45deg, #ff0055, #7a00ff, #00e5ff, #00ff66, #ffea00);
+background-size: 400% 400%;
+animation: dank-rainbow-bg 8s ease infinite;
 }
+
+/* Floating Meme Stickers & Overlay Badges */
+
+/* 1. LeBron James 'You Are My Sunshine' Aura Top Banner */
+body::before {
+content: "☀️️ YOU ARE MY SUNSHINE 👑 LEBRON EDITION ☀️";
+position: fixed;
+top: 10px;
+font-size: 1.1rem;
+font-weight: 900;
+color: #fff200;
+text-transform: uppercase;
+letter-spacing: 2px;
+background: rgba(0, 0, 0, 0.75);
+padding: 8px 18px;
+border-radius: 30px;
+border: 3px solid #ffcc00;
+animation: sunshine-glow 1.5s infinite alternate, meme-pulse 2s infinite ease-in-out;
+z-index: 100;
+}
+
+/* 2. Pixelated Sunglasses (Deal With It) Overlay */
+body::after {
+content: "🕶️ DEAL WITH IT 🕶️";
+position: fixed;
+bottom: 12px;
+font-size: 1rem;
+background: #000;
+color: #00ffcc;
+padding: 6px 16px;
+border: 2px solid #00ffcc;
+border-radius: 6px;
+animation: meme-spin-pulse 3s infinite ease-in-out;
+z-index: 100;
+box-shadow: 0 0 15px #00ffcc;
+}
+
+/* --- Main Converter Card (Dank Meme Styled) --- */
 
 .converter-card {
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 400px;
+background: rgba(20, 20, 20, 0.92);
+border: 5px solid #00ff66;
+border-radius: 20px;
+padding: 28px;
+width: 100%;
+max-width: 420px;
+position: relative;
+animation: sunshine-glow 2.5s infinite alternate;
+backdrop-filter: blur(8px);
 }
 
+/* OMG MOM GET THE CAMERA Title Header */
 h1 {
-  font-size: 1.5rem;
-  color: #1a1a1a;
-  margin-bottom: 20px;
-  text-align: center;
+font-size: 2rem;
+color: #ffffff;
+text-align: center;
+margin-bottom: 20px;
+text-transform: uppercase;
+letter-spacing: 1px;
+animation: camera-flash 0.2s infinite, meme-pulse 1.2s infinite ease-in-out;
 }
 
+h1::before {
+content: "📸 [MOM GET THE CAMERA] ";
+display: block;
+font-size: 0.85rem;
+color: #ff0055;
+letter-spacing: 2px;
+}
+
+/* Input Fields */
 .input-group {
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: column;
+margin-bottom: 18px;
+display: flex;
+flex-direction: column;
 }
 
 label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 6px;
+font-size: 1rem;
+color: #00e5ff;
+margin-bottom: 8px;
+text-shadow: 0 0 5px #00e5ff;
+text-transform: uppercase;
 }
 
 input, select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #cbd5e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s;
-  background-color: #fff;
+width: 100%;
+padding: 14px;
+border: 3px solid #ff00ff;
+border-radius: 12px;
+font-size: 1.1rem;
+background-color: #111;
+color: #00ff66;
+outline: none;
+font-weight: bold;
+transition: all 0.2s ease;
+box-shadow: inset 0 0 10px rgba(255, 0, 255, 0.5);
 }
 
 input:focus, select:focus {
-  border-color: #3182ce;
-  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+border-color: #ffff00;
+box-shadow: 0 0 20px #ffff00, inset 0 0 10px #ffff00;
+transform: scale(1.02);
 }
 
+/* Result Box with Smurf Cat & Willem Dafoe Vibe */
 .result-box {
-  margin-top: 24px;
-  padding: 16px;
-  background-color: #ebf8ff;
-  border: 1px solid #bee3f8;
-  border-radius: 8px;
-  text-align: center;
+margin-top: 24px;
+padding: 18px;
+background: linear-gradient(135deg, #11002c, #002c3e);
+border: 3px dashed #00ff66;
+border-radius: 14px;
+text-align: center;
+position: relative;
+overflow: hidden;
+animation: smurf-cat-float 2.5s infinite ease-in-out;
 }
 
 .result-label {
-  font-size: 0.875rem;
-  color: #2b6cb0;
-  display: block;
-  margin-bottom: 4px;
+font-size: 1rem;
+color: #ffea00;
+text-transform: uppercase;
+letter-spacing: 1px;
+animation: dafoe-tilt 3s infinite ease-in-out;
+display: block;
+margin-bottom: 6px;
+}
+
+.result-label::after {
+content: " 😳 (Willem Dafoe looking up)";
+font-size: 0.75rem;
+color: #ff7700;
 }
 
 .result-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2c5282;
-  word-break: break-all;
+font-size: 2.2rem;
+font-weight: 900;
+color: #00ffff;
+text-shadow: 0 0 12px #00ffff, 0 0 24px #00e5ff;
+word-break: break-all;
+animation: camera-flash 0.4s infinite;
+}
+
+/* --- Pulsing Meme Watermarks & Badges around Screen --- */
+
+/* 3. Tung Tung Tung Sahur Badge */
+.converter-card::before {
+content: "🥁 TUNG TUNG TUNG SAHUR!";
+position: absolute;
+top: -22px;
+right: -15px;
+background: #ff0055;
+color: #fff;
+font-size: 0.75rem;
+padding: 6px 12px;
+border-radius: 20px;
+border: 2px solid #fff;
+transform: rotate(12deg);
+animation: meme-spin-pulse 1.8s infinite ease-in-out;
+box-shadow: 0 0 10px #ff0055;
+}
+
+/* 4. Bombardino Crocodilo Badge */
+.converter-card::after {
+content: "🐊 BOMBARDINO CROCODILO";
+position: absolute;
+bottom: -20px;
+left: -15px;
+background: #00cc44;
+color: #000;
+font-size: 0.75rem;
+font-weight: 900;
+padding: 6px 12px;
+border-radius: 20px;
+border: 2px solid #000;
+transform: rotate(-10deg);
+animation: meme-pulse 1.4s infinite ease-in-out;
+box-shadow: 0 0 12px #00cc44;
+}
+
+/* 5. Smurf Cat ("We Live We Love We Lie") Floating Badge */
+.result-box::before {
+content: "💙 🍄 WE LIVE WE LOVE WE LIE (Smurf Cat)";
+display: block;
+font-size: 0.7rem;
+color: #00bfff;
+margin-bottom: 4px;
+animation: smurf-cat-float 2s infinite ease-in-out;
+}
+
+/* 6. Tom Holland & Surprise Dank Memes (GigaChad + Doge + Airhorn + MLG 420) /
+body {
+/ Extra floating meme visual badges in pseudo elements */
+background-image:
+radial-gradient(circle at 10% 20%, rgba(255, 0, 255, 0.4) 0%, transparent 20%),
+radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.4) 0%, transparent 20%);
+}
+
+/* Hitmarker Visual Target Effect on Hover */
+.converter-card:hover {
+animation: hitmarker-shake 0.3s infinite;
+border-color: #ff0000;
+}
+
+/* Responsive adjustments for mobile screen */
+@media (max-width: 480px) {
+body::before {
+font-size: 0.85rem;
+padding: 6px 12px;
+}
+
+.converter-card {
+padding: 20px;
+}
+
+h1 {
+font-size: 1.5rem;
+}
+
+.result-value {
+font-size: 1.8rem;
+}
 }
